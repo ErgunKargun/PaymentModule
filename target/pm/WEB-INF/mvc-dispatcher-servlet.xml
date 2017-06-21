@@ -1,0 +1,132 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+	<context:component-scan base-package="com.pm.*" />
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/pages/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages"/>
+    </bean>
+    
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="resolveLazily" value="true"/>
+    </bean>
+    
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" value="classpath:app.properties" />
+	</bean>
+
+	<!-- initialization for data source -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<!-- spring security -->
+	<import resource="/spring-security.xml" />
+
+	<!-- Hibernate session factory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+
+		<property name="packagesToScan">
+			<list>
+				<value>com.pm.model</value>
+			</list>
+		</property>
+
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+
+	</bean>
+
+	<!-- definition for userDAO bean -->
+	<bean id="userDao" class="com.pm.dao.UserDao">
+		<!-- <property name="dataSource" ref="dataSource" /> -->
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<!-- definition for debtDAO bean -->
+	<bean id="debtDao" class="com.pm.dao.DebtDao">
+		<!-- <property name="dataSource" ref="dataSource" /> -->
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- definition for roleDAO bean -->
+	<bean id="roleDao" class="com.pm.dao.RoleDao">
+		<!-- <property name="dataSource" ref="dataSource" /> -->
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- definition for roleDAO bean -->
+	<bean id="fileDao" class="com.pm.dao.FileDao">
+		<!-- <property name="dataSource" ref="dataSource" /> -->
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<!-- definition for file monitor 
+	<bean id="monitor" class="org.apache.commons.io.monitor.FileAlterationMonitor">
+		<constructor-arg index="0" type="long" value="${filemonitor.interval}" />
+		<constructor-arg ref="observer" />
+	</bean> -->
+
+	<!-- definition for file observer
+	<bean id="observer" class="org.apache.commons.io.monitor.FileAlterationObserver">
+		<constructor-arg index="0" type="java.lang.String"
+			value="${filemonitor.parent.dir}" />
+	</bean> -->
+
+	<!-- definition for Config 
+	<bean id="config" class="com.pm.configuration.Config">
+		<property name="twilio_account_sid" value="${config.twilio_account_sid}"></property>
+		<property name="twilio_auth_token" value="${config.twilio_auth_token}"></property>
+		<property name="twilio_phone_number" value="${config.twilio_phone_number}"></property>
+		<property name="auth_api_key" value="${config.auth_api_key}"></property>
+		<property name="smsexplorer_username" value="${config.smsexplorer_username}"></property>
+		<property name="smsexplorer_password" value="${config.smsexplorer_password}"></property>
+	</bean>-->
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:annotation-driven />
+
+</beans>
