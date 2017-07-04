@@ -112,7 +112,7 @@ public class DebtController {
 		
 		//send mail to user and admin who is responsible from him/her
 		reporter.report(user.getTc(), serials);
-		mailer.sendMail(user.getEmail(), "Sulama Fatura", "Faturanız", new File("c:/" + user.getTc() + "1fatura.pdf"));
+		mailer.sendMail(user.getEmail(), "Sulama Fatura", "Faturanız", new File("E:/" + user.getTc() + "Fatura.pdf"));
 		
 		return new JsonResponseObject("SUCCESS", null);
 	}

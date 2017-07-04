@@ -32,7 +32,7 @@ public class Reporter {
 
 		String query = "select * from debt where ";
 		for (int i = 0; i < serials.length; i++) {
-			query += "serial = " + serials[i];
+			query += "serial = '" + serials[i] + "'";
 			if (i != serials.length - 1)
 				query += " or ";
 		}
