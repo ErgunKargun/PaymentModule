@@ -24,15 +24,17 @@
 		</property>
 	</bean>
 
-    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basename" value="messages"/>
-    </bean>
-    
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="defaultEncoding" value="UTF-8"/>
-        <property name="resolveLazily" value="true"/>
-    </bean>
-    
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages" />
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="resolveLazily" value="true" />
+	</bean>
+
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations" value="classpath:app.properties" />
@@ -53,24 +55,21 @@
 	<!-- Hibernate session factory -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-
 		<property name="packagesToScan">
 			<list>
 				<value>com.pm.model</value>
 			</list>
 		</property>
-
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
-
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
 			</props>
 		</property>
-
 	</bean>
 
 	<!-- definition for userDAO bean -->
@@ -84,40 +83,55 @@
 		<!-- <property name="dataSource" ref="dataSource" /> -->
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	
+
 	<!-- definition for roleDAO bean -->
 	<bean id="roleDao" class="com.pm.dao.RoleDao">
 		<!-- <property name="dataSource" ref="dataSource" /> -->
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	
+
 	<!-- definition for roleDAO bean -->
 	<bean id="fileDao" class="com.pm.dao.FileDao">
 		<!-- <property name="dataSource" ref="dataSource" /> -->
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
-	<!-- definition for file monitor 
-	<bean id="monitor" class="org.apache.commons.io.monitor.FileAlterationMonitor">
-		<constructor-arg index="0" type="long" value="${filemonitor.interval}" />
-		<constructor-arg ref="observer" />
-	</bean> -->
+	<!-- definition for file monitor <bean id="monitor" class="org.apache.commons.io.monitor.FileAlterationMonitor"> 
+		<constructor-arg index="0" type="long" value="${filemonitor.interval}" /> 
+		<constructor-arg ref="observer" /> </bean> -->
 
-	<!-- definition for file observer
-	<bean id="observer" class="org.apache.commons.io.monitor.FileAlterationObserver">
-		<constructor-arg index="0" type="java.lang.String"
-			value="${filemonitor.parent.dir}" />
-	</bean> -->
+	<!-- definition for file observer <bean id="observer" class="org.apache.commons.io.monitor.FileAlterationObserver"> 
+		<constructor-arg index="0" type="java.lang.String" value="${filemonitor.parent.dir}" 
+		/> </bean> -->
 
-	<!-- definition for Config 
-	<bean id="config" class="com.pm.configuration.Config">
-		<property name="twilio_account_sid" value="${config.twilio_account_sid}"></property>
-		<property name="twilio_auth_token" value="${config.twilio_auth_token}"></property>
-		<property name="twilio_phone_number" value="${config.twilio_phone_number}"></property>
-		<property name="auth_api_key" value="${config.auth_api_key}"></property>
-		<property name="smsexplorer_username" value="${config.smsexplorer_username}"></property>
-		<property name="smsexplorer_password" value="${config.smsexplorer_password}"></property>
-	</bean>-->
+	<!-- definition for Config <bean id="config" class="com.pm.configuration.Config"> 
+		<property name="twilio_account_sid" value="${config.twilio_account_sid}"></property> 
+		<property name="twilio_auth_token" value="${config.twilio_auth_token}"></property> 
+		<property name="twilio_phone_number" value="${config.twilio_phone_number}"></property> 
+		<property name="auth_api_key" value="${config.auth_api_key}"></property> 
+		<property name="smsexplorer_username" value="${config.smsexplorer_username}"></property> 
+		<property name="smsexplorer_password" value="${config.smsexplorer_password}"></property> 
+		</bean> -->
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="ergunkargun@gmail.com" />
+		<property name="password" value="Ergun_kargun2016" />
+
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="mailer" class="com.pm.mail.Mailer">
+		<property name="mailSender" ref="mailSender" />
+	</bean>
+	
+	<bean id="reporter" class="com.pm.report.Reporter"></bean>
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 

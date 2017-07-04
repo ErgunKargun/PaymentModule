@@ -39,8 +39,8 @@
 
 			<div class="container">
 				<label><b>İsim</b></label> <input type="text"
-					placeholder="Adınızı giriniz" name="name" required> <label><b>Tc
-						kimlik</b></label> <input type="text" placeholder="Tc giriniz" name="tc"
+					placeholder="Adınızı giriniz (Örn. Adem)" name="name" required> <label><b>Tc
+						kimlik</b></label> <input type="text" placeholder="Tc giriniz (Örn. 10000000146)" name="tc"
 					required>
 
 				<button 
@@ -53,7 +53,7 @@
 			<div class="container" style="background-color: #f1f1f1">
 				<button type="button"
 					onclick="document.getElementById('loginModal').style.display='none'"
-					class="cancelbtn">Cancel</button>
+					class="cancelbtn">İptal</button>
 			</div>
 		</form>
 	</div>

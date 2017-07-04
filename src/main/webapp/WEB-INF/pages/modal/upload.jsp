@@ -37,7 +37,7 @@
 					<div class="form-group">
 						<label class="col-sm-3 control-label">Dosya seç</label>
 						<div class="col-sm-9">
-							<form:input type="file" name="multipartFile" id="multipartFile"
+							<form:input type="file" name="multipartFile"
 								path="multipartFile" required="required" />
 						</div>
 					</div>

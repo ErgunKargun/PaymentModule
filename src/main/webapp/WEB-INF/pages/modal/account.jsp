@@ -71,11 +71,11 @@
 					method="post" modelAttribute="formUpdateAccount"
 					action="${urlUpdateAccount}">
 
-					<form:hidden path="tc" name="tc" id="tc" value="${admin.tc}" />
+					<form:hidden path="tc" name="tc" value="${admin.tc}" />
 
 					<!-- <div class="form-group">
-						<label class="col-sm-2 control-label">Tc</label>
-						<div class="col-sm-10">
+						<label class="col-sm-3 control-label">Tc</label>
+						<div class="col-sm-9">
 							<form:input path="tc" name="tc" type="tel"
 								placeholder="Tc giriniz (Örn. 10000000146)" value="${admin.tc}"
 								class="form-control" minlength="11" maxlength="11"
@@ -84,8 +84,8 @@
 					</div> -->
 
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Ad</label>
-						<div class="col-sm-10">
+						<label class="col-sm-3 control-label">Ad</label>
+						<div class="col-sm-9">
 							<form:input path="name" name="name" type="text"
 								placeholder="Ad giriniz (Örn. Adem)" value="${admin.name}"
 								class="form-control" minlength="3" required="required" />
@@ -93,8 +93,8 @@
 					</div>
 
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Soyad</label>
-						<div class="col-sm-10">
+						<label class="col-sm-3 control-label">Soyad</label>
+						<div class="col-sm-9">
 							<form:input path="surname" name="surname" type="text"
 								placeholder="Soyad giriniz (Örn. Tok)" value="${admin.surname}"
 								class="form-control" minlength="3" required="required" />
@@ -102,8 +102,8 @@
 					</div>
 
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Email</label>
-						<div class="col-sm-10">
+						<label class="col-sm-3 control-label">Email</label>
+						<div class="col-sm-9">
 							<form:input path="email" name="email" type="email"
 								placeholder="Email giriniz (Örn. ergunkargun@gmail.com)"
 								value="${admin.email}" class="form-control" required="required" />
@@ -111,25 +111,38 @@
 					</div>
 
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Telefon</label>
-						<div class="col-sm-10">
+						<label class="col-sm-3 control-label">Telefon</label>
+						<div class="col-sm-9">
 							<form:input path="phoneNumber" name="phoneNumber" type="tel"
 								placeholder="Telefon giriniz (Örn. 5551234567)"
 								value="${admin.phoneNumber}" class="form-control" minlength="10"
 								maxlength="10" data-rule-digit="true" required="required" />
 						</div>
 					</div>
+										
+					<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Banka Hesap</label>
+							<div class="col-sm-9">
+								<spring:bind path="stripe">
+									<form:input path="stripe" name="stripe" type="text"
+										placeholder="stripe live key"
+										class="form-control stripe"/>
+								</spring:bind>
+							</div>
+						</div>
+					</sec:authorize>
 
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Admin email</label>
-						<div class="col-sm-10">
+						<label class="col-sm-3 control-label">Admin email</label>
+						<div class="col-sm-9">
 							<span class="label label-primary">${admin.adminEmail}</span>
 							<form:hidden path="adminEmail" name="adminEmail"
 								value="${admin.adminEmail}" />
 							<!--<form:hidden path="enabled" name="enabled"
-								id="enabled" value="1" />
+								value="1" />
 							<form:hidden path="countryCode" name="countryCode"
-								id="countryCode" value="90" /> -->
+								value="90" /> -->
 						</div>
 					</div>
 				</form:form>

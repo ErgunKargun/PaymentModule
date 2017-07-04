@@ -27,7 +27,7 @@
 									<label for="cardNumber">Kart Numaranız</label>
 									<div class="input-group">
 										<input type="tel" class="form-control" name="cardNumber"
-											placeholder="Valid Card Number" required autofocus /> <span
+											placeholder="Geçerli kart numarası" required autofocus /> <span
 											class="input-group-addon"><i class="fa fa-credit-card"></i></span>
 									</div>
 								</div>

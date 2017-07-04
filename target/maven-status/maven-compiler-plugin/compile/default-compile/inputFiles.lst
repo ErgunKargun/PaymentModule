@@ -1,7 +1,9 @@
 C:\Users\Ergun\SpringProjects\pm\src\main\java\com\pm\session\SessionManager.java
+C:\Users\Ergun\SpringProjects\pm\src\main\java\com\pm\model\compositekey\RoleCompositeKey.java
 C:\Users\Ergun\SpringProjects\pm\src\main\java\com\pm\model\User.java
 C:\Users\Ergun\SpringProjects\pm\src\main\java\com\pm\model\Debt.java
 C:\Users\Ergun\SpringProjects\pm\src\main\java\com\pm\json\response\JsonResponseObject.java
+C:\Users\Ergun\SpringProjects\pm\src\main\java\com\pm\server\EmbeddedServer.java
 C:\Users\Ergun\SpringProjects\pm\src\main\java\com\pm\controller\UserController.java
 C:\Users\Ergun\SpringProjects\pm\src\main\java\com\pm\model\FileBucket.java
 C:\Users\Ergun\SpringProjects\pm\src\main\java\com\pm\model\File.java
@@ -13,6 +15,9 @@ C:\Users\Ergun\SpringProjects\pm\src\main\java\com\pm\validator\FileValidator.ja
 C:\Users\Ergun\SpringProjects\pm\src\main\java\com\pm\controller\filemonitorservice\FileMonitor.java
 C:\Users\Ergun\SpringProjects\pm\src\main\java\com\pm\dao\DebtDao.java
 C:\Users\Ergun\SpringProjects\pm\src\main\java\com\pm\dao\RoleDao.java
+C:\Users\Ergun\SpringProjects\pm\src\main\java\com\pm\report\Reporter.java
 C:\Users\Ergun\SpringProjects\pm\src\main\java\com\pm\controller\AdminController.java
+C:\Users\Ergun\SpringProjects\pm\src\main\java\com\pm\mail\Mailer.java
 C:\Users\Ergun\SpringProjects\pm\src\main\java\com\pm\controller\DebtController.java
 C:\Users\Ergun\SpringProjects\pm\src\main\java\com\pm\controller\LoginController.java
+C:\Users\Ergun\SpringProjects\pm\src\main\java\com\pm\model\enums\Durum.java

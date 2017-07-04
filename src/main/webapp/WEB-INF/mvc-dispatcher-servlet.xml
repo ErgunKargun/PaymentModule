@@ -113,6 +113,26 @@
 		<property name="smsexplorer_password" value="${config.smsexplorer_password}"></property> 
 		</bean> -->
 
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="ergunkargun@gmail.com" />
+		<property name="password" value="Ergun_kargun2016" />
+
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="mailer" class="com.pm.mail.Mailer">
+		<property name="mailSender" ref="mailSender" />
+	</bean>
+	
+	<bean id="reporter" class="com.pm.report.Reporter"></bean>
+
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<bean id="transactionManager"

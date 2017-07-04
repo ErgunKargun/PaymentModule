@@ -91,13 +91,20 @@ public class FileMonitor extends FileAlterationListenerAdaptor {
 			 * roleDao.insert(new Role(new RoleCompositeKey("17644635680",
 			 * "ROLE_DEVELOPER")));
 			 */
-			userDao.insert(new User("17644635680", "Ergün", "Kargün", "ergunkargun@gmail.com", "5395535700",
+			userDao.insert(new User("17644635680", "Ergun", "Kargun", "ergunkargun@gmail.com", "5395535700",
 					"kargunergun@gmail.com"));
 			roleDao.insert(new Role(new RoleCompositeKey("17644635680", "ROLE_AGA")));
 
-			userDao.insert(new User("12345678901", "Abdullah", "Kargün", "apokargun@gmail.com", "5395535700",
-					"ergunkargun@gmail.com"));
+			User adminTest = new User("12345678901", "Abdullah", "Kargün", "apokargun@gmail.com", "5395535700",
+					"ergunkargun@gmail.com");
+			adminTest.setStripe("sk_test_uumslaUH4IHyRX7oyRUS9Wad");
+			userDao.insert(adminTest);
 			roleDao.insert(new Role(new RoleCompositeKey("12345678901", "ROLE_ADMIN")));
+			
+			userDao.insert(new User("10000000046", "Humeyra", "Gurses", "humeyra_gurses@hotmail.com", "5395535700",
+					"apokargun@gmail.com"));
+			roleDao.insert(new Role(new RoleCompositeKey("10000000046", "ROLE_USER")));
+			debtDao.insert(new Debt("asda", "sdf", "10000000046", "sda", "asdad", new BigDecimal("123"), new BigDecimal("12")));
 
 			logger.info("Inserting the top of pyramid" + this.getClass().getName());
 		}

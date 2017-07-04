@@ -24,7 +24,7 @@
 			</div>
 			<div class="modal-footer">
 				<button class="btn btn-default" data-dismiss="modal">İptal</button>
-				<button class="btn btn-danger" id="modalFooterButtonDelete" onclick="deleteObject()">Sil</button>
+				<button class="btn btn-danger" id="modalFooterButtonDelete" onclick="deleteObject(this)">Sil</button>
 			</div>
 		</div>
 	</div>

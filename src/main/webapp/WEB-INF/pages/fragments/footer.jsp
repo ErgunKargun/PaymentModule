@@ -22,8 +22,10 @@
 <!-- Ajax Form submit
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.1/jquery.form.min.js"></script> -->
+<!-- <script type="text/javascript"
+	src="https://malsup.github.com/jquery.form.js"></script> -->
 <script type="text/javascript"
-	src="http://malsup.github.com/jquery.form.js"></script>
+	src="<c:url value='/resources/js/jquery.form.js' />"></script>
 
 <!-- <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/g/jquery.formvalidation@0.6.1(js/language/tr_TR.js+js/formValidation.min.js)"></script> -->

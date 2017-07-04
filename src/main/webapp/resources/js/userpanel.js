@@ -544,7 +544,8 @@ function adminDatatableRun() {
 var urlPayment;
 var serialParam;
 function handle(checkboxElem) {
-	serialParam = [];
+	//serialParam = [];
+	serialParam = "";
 	var total = 0;
 	var checkboxElems = document.getElementsByTagName("input");
 	document.getElementById("toPayment").disabled = true;
@@ -553,7 +554,8 @@ function handle(checkboxElem) {
 			if (checkboxElems[i].checked) {
 				document.getElementById("toPayment").disabled = false;
 				total += Number(checkboxElems[i].getAttribute("value")); //.toFixed(2)
-				serialParam.push(checkboxElems[i].getAttribute("data-serial"));
+				//serialParam.push(checkboxElems[i].getAttribute("data-serial"));
+				serialParam += checkboxElems[i].getAttribute("data-serial") + "&";
 			}
 		}
 	}

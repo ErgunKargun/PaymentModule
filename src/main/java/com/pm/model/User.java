@@ -3,10 +3,11 @@ package com.pm.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Size;
 
@@ -20,7 +21,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 
 @Entity
-@Table(name = "user")
+@Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = {"stripe","email"})})
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -35,6 +36,8 @@ public class User implements Serializable {
 	private String enabled = "1";
 	private Date created;
 	private Date updated;
+	
+	private String stripe;
 
 	public User() {
 
@@ -85,6 +88,7 @@ public class User implements Serializable {
 
 	@Email
 	@NotEmpty
+	@Column(unique=true)
 	public String getEmail() {
 		return email;
 	}
@@ -161,5 +165,14 @@ public class User implements Serializable {
 		return "User [tc=" + tc + ", name=" + name + ", surname=" + surname + ", email=" + email + ", countryCode="
 				+ countryCode + ", phoneNumber=" + phoneNumber + ", adminEmail=" + adminEmail + ", enabled=" + enabled
 				+ ", created=" + created + ", updated=" + updated + "]";
+	}
+
+	@Column(unique=true)
+	public String getStripe() {
+		return stripe;
+	}
+
+	public void setStripe(String stripe) {
+		this.stripe = stripe;
 	}
 }

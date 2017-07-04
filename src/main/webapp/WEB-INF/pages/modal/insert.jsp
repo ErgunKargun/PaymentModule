@@ -87,9 +87,9 @@
 									class="adminEmail" value="${admin.email}" />
 							</spring:bind>
 							<!--<form:hidden path="enabled" name="enabled"
-								id="enabled" value="1" />
+								value="1" />
 							<form:hidden path="countryCode" name="countryCode"
-								id="countryCode" value="90" /> -->
+								value="90" /> -->
 						</div>
 					</div>
 				</form:form>

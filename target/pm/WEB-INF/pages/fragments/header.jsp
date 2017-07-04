@@ -8,6 +8,12 @@
 <title>Online Ödeme</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- for ajax requests -->
+<meta name="_csrf" content="${_csrf.token}" />
+<!-- default header name is X-CSRF-TOKEN -->
+<meta name="_csrf_header" content="${_csrf.headerName}" />
+
 <link rel="icon" type="image/png"
 	href="<c:url value='/resources/images/favicon.png' />">
 
@@ -22,10 +28,6 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!-- Datatable css stylesheet -->
-<link rel="stylesheet"
-	href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
-
 <!-- Form Validation css stylesheet -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/jquery.formvalidation/0.6.1/css/formValidation.min.css">
@@ -36,10 +38,18 @@
 
 <!-- Sweetalert2 css stylesheet -->
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.4/sweetalert2.min.css">
+	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.5/sweetalert2.min.css">
 <!-- Sweetalert Bootstrap css stylesheet
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/sweetalert.css' />"> -->
+
+<!-- Datatable css stylesheet -->
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/buttons/1.3.1/css/buttons.bootstrap.min.css">
 
 <!-- Local css stylesheets -->
 <link rel="stylesheet"
@@ -53,22 +63,14 @@
 	<spring:url value="/user/userpanel" var="urlHome" />
 	<spring:url value="/logout" var="urlLogout" />
 
-	<spring:url value="/user/datatable" var="urlUserDatatable" />
-	<spring:url value="/admin/datatable" var="urlAdminDatatable" />
-
-	<spring:url value="/admin/update/account" var="urlUpdateAccount" />
-	<spring:url value="/admin/insert/user" var="urlInsertNewUser" />	
-	<spring:url value="/admin/upload" var="urlUpload" />
-
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="${urlHome}">Arma Bilgisayar</a>
 			</div>
-			<div id="navbar">
-				<ul class="nav navbar-nav navbar-right">
-					<sec:authorize
-						access="hasRole('ROLE_ADMIN') or hasRole('ROLE_AGA')">
+			<ul class="nav navbar-nav navbar-right">
+				<sec:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_AGA')">
+					<li>
 						<div class="dropdown">
 							<button class="btn btn-primary dropdown-toggle" type="button"
 								data-toggle="dropdown">
@@ -90,29 +92,29 @@
 								</a></li>
 							</ul>
 						</div>
-					</sec:authorize>
-					<li>
-						<div class="dropdown">
-							<button class="btn btn-primary dropdown-toggle" type="button"
-								data-toggle="dropdown">
-								<span class="glyphicon glyphicon-user"></span> Hesap <span
-									class="caret"></span>
-							</button>
-							<ul class="dropdown-menu">
-								<li class="dropdown-header">Hesap Özeti</li>
-								<li><a class="btn btn-default" data-toggle="modal"
-									data-target="#modalAccount"> <span
-										class="glyphicon glyphicon-info-sign"></span> Hesap
-								</a></li>
-								<li class="divider"></li>
-								<li class="dropdown-header">Çıkış</li>
-								<li><a href="${urlLogout}" class="btn btn-default"> <span
-										class="glyphicon glyphicon-log-out"></span> Çıkış
-								</a></li>
-							</ul>
-						</div>
 					</li>
-				</ul>
-			</div>
+				</sec:authorize>
+				<li>
+					<div class="dropdown">
+						<button class="btn btn-primary dropdown-toggle" type="button"
+							data-toggle="dropdown">
+							<span class="glyphicon glyphicon-user"></span> Hesap <span
+								class="caret"></span>
+						</button>
+						<ul class="dropdown-menu">
+							<li class="dropdown-header">Hesap Özeti</li>
+							<li><a class="btn btn-default" data-toggle="modal"
+								data-target="#modalAccount"> <span
+									class="glyphicon glyphicon-info-sign"></span> Hesap
+							</a></li>
+							<li class="divider"></li>
+							<li class="dropdown-header">Çıkış</li>
+							<li><a href="${urlLogout}" class="btn btn-default"> <span
+									class="glyphicon glyphicon-log-out"></span> Çıkış
+							</a></li>
+						</ul>
+					</div>
+				</li>
+			</ul>
 		</div>
-	</nav>	
+	</nav>

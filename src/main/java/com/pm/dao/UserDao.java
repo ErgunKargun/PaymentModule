@@ -43,6 +43,13 @@ public class UserDao extends HibernateDaoSupport {
 	public User getUserByTc(String tc) {
 		return getHibernateTemplate().get(User.class, tc);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = false)
+	public List<User> getUserByEmail(String email) {
+		//return getHibernateTemplate().get(User.class, email);
+		return (List<User>) getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery("from User where email = '" + email + "'").list();
+	}
 
 	@Transactional(readOnly = false)
 	@SuppressWarnings({ "unchecked" })	
